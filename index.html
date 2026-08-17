@@ -7,53 +7,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #2c2c2a; background: #f9f9f7; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #e8e8e8; background: #1a1a1a; }
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        h1 { font-size: 32px; margin-bottom: 8px; font-weight: 600; }
-        .subtitle { font-size: 16px; color: #888; margin-bottom: 40px; }
-        h2 { font-size: 24px; margin-top: 48px; margin-bottom: 16px; font-weight: 600; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px; }
-        h3 { font-size: 18px; margin-top: 28px; margin-bottom: 12px; font-weight: 600; }
-        p { margin-bottom: 14px; }
-        .section { background: white; padding: 32px; border-radius: 8px; margin-bottom: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .key-finding { background: #f0f5fa; padding: 16px 20px; border-left: 4px solid #2a78d6; margin: 20px 0; border-radius: 4px; }
+        h1 { font-size: 32px; margin-bottom: 8px; font-weight: 600; color: #ffffff; }
+        .subtitle { font-size: 16px; color: #aaaaaa; margin-bottom: 40px; }
+        h2 { font-size: 24px; margin-top: 48px; margin-bottom: 16px; font-weight: 600; border-bottom: 2px solid #333333; padding-bottom: 8px; color: #ffffff; }
+        h3 { font-size: 18px; margin-top: 28px; margin-bottom: 12px; font-weight: 600; color: #ffffff; }
+        p { margin-bottom: 14px; color: #d0d0d0; }
+        .section { background: #2a2a2a; padding: 32px; border-radius: 8px; margin-bottom: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .key-finding { background: #1e3a5f; padding: 16px 20px; border-left: 4px solid #4a9eff; margin: 20px 0; border-radius: 4px; color: #d0d0d0; }
         .comparison-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
-        .comparison-item { background: #f9f9f7; padding: 16px; border-radius: 6px; border-left: 3px solid #999; }
-        .frozen-yogurt { border-left-color: #3266ad; }
-        .frozen-custard { border-left-color: #eb6834; }
-        .comparison-item strong { display: block; margin-bottom: 8px; }
-        .comparison-item ul { margin-left: 20px; font-size: 14px; }
+        .comparison-item { background: #333333; padding: 16px; border-radius: 6px; border-left: 3px solid #666666; }
+        .frozen-yogurt { border-left-color: #4a9eff; }
+        .frozen-custard { border-left-color: #ff8844; }
+        .comparison-item strong { display: block; margin-bottom: 8px; color: #ffffff; }
+        .comparison-item ul { margin-left: 20px; font-size: 14px; color: #d0d0d0; }
         .comparison-item li { margin-bottom: 6px; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
-        th { background: #f0f0f0; padding: 12px; text-align: left; font-weight: 600; border-bottom: 1px solid #ddd; }
-        td { padding: 12px; border-bottom: 1px solid #eee; }
-        tr:hover { background: #fafafa; }
-        .score-high { color: #0ca30c; font-weight: 600; }
-        .score-medium { color: #fab219; font-weight: 600; }
-        .score-low { color: #d03b3b; font-weight: 600; }
-        .chart-container { position: relative; width: 100%; height: 320px; margin: 20px 0; }
-        .case-study { background: #fafafa; padding: 20px; border-radius: 6px; margin-bottom: 16px; }
-        .case-study-title { font-weight: 600; margin-bottom: 8px; font-size: 16px; }
-        .case-study-detail { font-size: 13px; color: #666; }
-        .recommendation-box { background: #f0f5fa; padding: 24px; border-radius: 8px; margin: 20px 0; }
-        .recommendation-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: #185fa5; }
+        th { background: #333333; padding: 12px; text-align: left; font-weight: 600; border-bottom: 1px solid #444444; color: #ffffff; }
+        td { padding: 12px; border-bottom: 1px solid #333333; color: #d0d0d0; }
+        tr:hover { background: #353535; }
+        .score-high { color: #4ade80; font-weight: 600; }
+        .score-medium { color: #facc15; font-weight: 600; }
+        .score-low { color: #ff6b6b; font-weight: 600; }
+        .chart-container { position: relative; width: 100%; height: 320px; margin: 20px 0; background: #252525; padding: 16px; border-radius: 6px; }
+        .case-study { background: #2f2f2f; padding: 20px; border-radius: 6px; margin-bottom: 16px; border: 1px solid #3a3a3a; }
+        .case-study-title { font-weight: 600; margin-bottom: 8px; font-size: 16px; color: #ffffff; }
+        .case-study-detail { font-size: 13px; color: #b0b0b0; }
+        .recommendation-box { background: #1e3a5f; padding: 24px; border-radius: 8px; margin: 20px 0; border: 1px solid #2a5080; }
+        .recommendation-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: #6ba3ff; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin: 20px 0; }
-        .stat-card { background: #f9f9f7; padding: 16px; border-radius: 6px; text-align: center; }
-        .stat-value { font-size: 24px; font-weight: 600; color: #2a78d6; margin-bottom: 4px; }
-        .stat-label { font-size: 12px; color: #888; }
-        .decision-frame { border: 2px solid #2a78d6; padding: 20px; border-radius: 8px; margin: 20px 0; background: #f5f9ff; }
-        .decision-frame h4 { font-size: 16px; margin-bottom: 12px; color: #185fa5; }
-        .footnote { font-size: 12px; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
+        .stat-card { background: #2f2f2f; padding: 16px; border-radius: 6px; text-align: center; border: 1px solid #3a3a3a; }
+        .stat-value { font-size: 24px; font-weight: 600; color: #4a9eff; margin-bottom: 4px; }
+        .stat-label { font-size: 12px; color: #888888; }
+        .decision-frame { border: 2px solid #4a9eff; padding: 20px; border-radius: 8px; margin: 20px 0; background: #1e3a5f; }
+        .decision-frame h4 { font-size: 16px; margin-bottom: 12px; color: #6ba3ff; }
+        .footnote { font-size: 12px; color: #888888; margin-top: 40px; padding-top: 20px; border-top: 1px solid #333333; }
         .nav-section { display: none; }
         .nav-section.active { display: block; }
-        nav { background: white; padding: 16px; margin-bottom: 28px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        nav button { background: none; border: 1px solid #ddd; padding: 8px 16px; margin-right: 8px; border-radius: 4px; cursor: pointer; font-size: 13px; }
-        nav button.active { background: #2a78d6; color: white; border-color: #2a78d6; }
-        nav button:hover { background: #f0f0f0; }
-        nav button.active:hover { background: #185fa5; }
+        nav { background: #2a2a2a; padding: 16px; margin-bottom: 28px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        nav button { background: transparent; border: 1px solid #444444; padding: 8px 16px; margin-right: 8px; border-radius: 4px; cursor: pointer; font-size: 13px; color: #d0d0d0; }
+        nav button:hover { background: #333333; border-color: #555555; }
+        nav button.active { background: #4a9eff; color: white; border-color: #4a9eff; }
+        nav button.active:hover { background: #3a8fff; }
         .metric-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
-        .alert { background: #fcebeb; border-left: 4px solid #d03b3b; padding: 16px; margin: 20px 0; border-radius: 4px; }
-        .alert strong { color: #d03b3b; }
-        .success { background: #eaf3de; border-left: 4px solid #0ca30c; padding: 16px; margin: 20px 0; border-radius: 4px; }
+        .alert { background: #4a2626; border-left: 4px solid #ff6b6b; padding: 16px; margin: 20px 0; border-radius: 4px; color: #d0d0d0; }
+        .alert strong { color: #ff9999; }
+        .success { background: #2a4a2a; border-left: 4px solid #4ade80; padding: 16px; margin: 20px 0; border-radius: 4px; color: #d0d0d0; }
     </style>
 </head>
 <body>
@@ -809,16 +809,16 @@
                     {
                         label: 'Frozen Yogurt',
                         data: [48, 18, 28, 4, 2],
-                        backgroundColor: '#3266ad',
-                        borderColor: '#3266ad',
+                        backgroundColor: '#4a9eff',
+                        borderColor: '#4a9eff',
                         borderRadius: 4,
                         borderSkipped: false
                     },
                     {
                         label: 'Frozen Custard',
                         data: [64, 8, 12, 10, 6],
-                        backgroundColor: '#eb6834',
-                        borderColor: '#eb6834',
+                        backgroundColor: '#ff8844',
+                        borderColor: '#ff8844',
                         borderRadius: 4,
                         borderSkipped: false
                     }
@@ -828,11 +828,12 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: true, position: 'top' },
-                    title: { display: true, text: 'Global Market Share by Region (%)' }
+                    legend: { display: true, position: 'top', labels: { color: '#d0d0d0' } },
+                    title: { display: true, text: 'Global Market Share by Region (%)', color: '#ffffff' }
                 },
                 scales: {
-                    y: { beginAtZero: true, max: 70, title: { display: true, text: 'Market Share %' } }
+                    y: { beginAtZero: true, max: 70, title: { display: true, text: 'Market Share %', color: '#d0d0d0' }, ticks: { color: '#a0a0a0' }, grid: { color: '#333333' } },
+                    x: { ticks: { color: '#a0a0a0' }, grid: { color: '#333333' } }
                 }
             }
         });
@@ -847,18 +848,18 @@
                     {
                         label: 'Frozen Yogurt',
                         data: [8, 7, 9, 7, 7, 9, 6, 7],
-                        borderColor: '#3266ad',
-                        backgroundColor: 'rgba(50, 102, 173, 0.1)',
+                        borderColor: '#4a9eff',
+                        backgroundColor: 'rgba(74, 158, 255, 0.15)',
                         borderWidth: 2,
-                        pointBackgroundColor: '#3266ad'
+                        pointBackgroundColor: '#4a9eff'
                     },
                     {
                         label: 'Frozen Custard',
                         data: [5, 9, 6, 9, 9, 6, 9, 8],
-                        borderColor: '#eb6834',
-                        backgroundColor: 'rgba(235, 104, 52, 0.1)',
+                        borderColor: '#ff8844',
+                        backgroundColor: 'rgba(255, 136, 68, 0.15)',
                         borderWidth: 2,
-                        pointBackgroundColor: '#eb6834'
+                        pointBackgroundColor: '#ff8844'
                     }
                 ]
             },
@@ -866,11 +867,11 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: true, position: 'top' },
-                    title: { display: true, text: 'Consumer Appeal Attributes (1–10 scale)' }
+                    legend: { display: true, position: 'top', labels: { color: '#d0d0d0' } },
+                    title: { display: true, text: 'Consumer Appeal Attributes (1–10 scale)', color: '#ffffff' }
                 },
                 scales: {
-                    r: { beginAtZero: true, max: 10, title: { display: true, text: 'Appeal Score' } }
+                    r: { beginAtZero: true, max: 10, title: { display: true, text: 'Appeal Score', color: '#d0d0d0' }, ticks: { color: '#a0a0a0' }, grid: { color: '#333333' } }
                 }
             }
         });
@@ -885,12 +886,12 @@
                     {
                         label: 'Frozen Yogurt',
                         data: [6, 7, 7, 9, 9, 7, 5],
-                        backgroundColor: '#3266ad'
+                        backgroundColor: '#4a9eff'
                     },
                     {
                         label: 'Frozen Custard',
                         data: [9, 9, 9, 5, 7, 10, 10],
-                        backgroundColor: '#eb6834'
+                        backgroundColor: '#ff8844'
                     }
                 ]
             },
@@ -899,11 +900,12 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: true, position: 'top' },
-                    title: { display: true, text: 'Business Model Strength Comparison' }
+                    legend: { display: true, position: 'top', labels: { color: '#d0d0d0' } },
+                    title: { display: true, text: 'Business Model Strength Comparison', color: '#ffffff' }
                 },
                 scales: {
-                    x: { beginAtZero: true, max: 10 }
+                    x: { beginAtZero: true, max: 10, ticks: { color: '#a0a0a0' }, grid: { color: '#333333' } },
+                    y: { ticks: { color: '#a0a0a0' }, grid: { color: '#333333' } }
                 }
             }
         });
