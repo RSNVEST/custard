@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frozen Yogurt vs Frozen Custard — Market Strategy Report for Morocco</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #2c2c2a; background: #f9f9f7; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        h1 { font-size: 32px; margin-bottom: 8px; font-weight: 600; }
+        .subtitle { font-size: 16px; color: #888; margin-bottom: 40px; }
+        h2 { font-size: 24px; margin-top: 48px; margin-bottom: 16px; font-weight: 600; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px; }
+        h3 { font-size: 18px; margin-top: 28px; margin-bottom: 12px; font-weight: 600; }
+        p { margin-bottom: 14px; }
+        .section { background: white; padding: 32px; border-radius: 8px; margin-bottom: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .key-finding { background: #f0f5fa; padding: 16px 20px; border-left: 4px solid #2a78d6; margin: 20px 0; border-radius: 4px; }
+        .comparison-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+        .comparison-item { background: #f9f9f7; padding: 16px; border-radius: 6px; border-left: 3px solid #999; }
+        .frozen-yogurt { border-left-color: #3266ad; }
+        .frozen-custard { border-left-color: #eb6834; }
+        .comparison-item strong { display: block; margin-bottom: 8px; }
+        .comparison-item ul { margin-left: 20px; font-size: 14px; }
+        .comparison-item li { margin-bottom: 6px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        th { background: #f0f0f0; padding: 12px; text-align: left; font-weight: 600; border-bottom: 1px solid #ddd; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        tr:hover { background: #fafafa; }
+        .score-high { color: #0ca30c; font-weight: 600; }
+        .score-medium { color: #fab219; font-weight: 600; }
+        .score-low { color: #d03b3b; font-weight: 600; }
+        .chart-container { position: relative; width: 100%; height: 320px; margin: 20px 0; }
+        .case-study { background: #fafafa; padding: 20px; border-radius: 6px; margin-bottom: 16px; }
+        .case-study-title { font-weight: 600; margin-bottom: 8px; font-size: 16px; }
+        .case-study-detail { font-size: 13px; color: #666; }
+        .recommendation-box { background: #f0f5fa; padding: 24px; border-radius: 8px; margin: 20px 0; }
+        .recommendation-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: #185fa5; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin: 20px 0; }
+        .stat-card { background: #f9f9f7; padding: 16px; border-radius: 6px; text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 600; color: #2a78d6; margin-bottom: 4px; }
+        .stat-label { font-size: 12px; color: #888; }
+        .decision-frame { border: 2px solid #2a78d6; padding: 20px; border-radius: 8px; margin: 20px 0; background: #f5f9ff; }
+        .decision-frame h4 { font-size: 16px; margin-bottom: 12px; color: #185fa5; }
+        .footnote { font-size: 12px; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
+        .nav-section { display: none; }
+        .nav-section.active { display: block; }
+        nav { background: white; padding: 16px; margin-bottom: 28px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        nav button { background: none; border: 1px solid #ddd; padding: 8px 16px; margin-right: 8px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        nav button.active { background: #2a78d6; color: white; border-color: #2a78d6; }
+        nav button:hover { background: #f0f0f0; }
+        nav button.active:hover { background: #185fa5; }
+        .metric-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+        .alert { background: #fcebeb; border-left: 4px solid #d03b3b; padding: 16px; margin: 20px 0; border-radius: 4px; }
+        .alert strong { color: #d03b3b; }
+        .success { background: #eaf3de; border-left: 4px solid #0ca30c; padding: 16px; margin: 20px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frozen Yogurt vs Frozen Custard</h1>
+        <p class="subtitle">Market Strategy Report for Premium Frozen Dessert Brand Entry — Casablanca, Morocco</p>
+
+        <nav>
+            <button class="nav-btn active" onclick="showSection('exec-summary')">1. Executive Summary</button>
+            <button class="nav-btn" onclick="showSection('global-overview')">2. Global Overview</button>
+            <button class="nav-btn" onclick="showSection('consumer-appeal')">3. Consumer Appeal</button>
+            <button class="nav-btn" onclick="showSection('business-models')">4. Business Models</button>
+            <button class="nav-btn" onclick="showSection('case-studies')">5. Case Studies</button>
+            <button class="nav-btn" onclick="showSection('morocco')">6. Morocco Opportunity</button>
+            <button class="nav-btn" onclick="showSection('scorecard')">7. Strategic Scorecard</button>
+            <button class="nav-btn" onclick="showSection('recommendation')">8. Final Recommendation</button>
+            <button class="nav-btn" onclick="showSection('testing')">9. Validation Plan</button>
+            <button class="nav-btn" onclick="showSection('decision')">10. Decision Summary</button>
+        </nav>
+
+        <!-- SECTION 1: EXECUTIVE SUMMARY -->
+        <div id="exec-summary" class="nav-section active">
+            <div class="section">
+                <h2>1. Executive Summary</h2>
+                <p>This report analyzes the global frozen yogurt and frozen custard categories to determine which concept offers the strongest opportunity for a premium frozen dessert brand entering Casablanca, Morocco.</p>
+                
+                <h3>What We Know</h3>
+                <p><strong>Global market maturity:</strong> Frozen yogurt is the larger, more mature category (~$3–9B globally); frozen custard is smaller but concentrated (~$1.4B), primarily in North America. Frozen yogurt dominates Asia-Pacific; frozen custard is Midwest USA/North America-centric.</p>
+                
+                <p><strong>Consumer sentiment:</strong> Frozen yogurt appeals to health-conscious consumers (probiotics, lower fat) and Gen Z (customization, social media). Frozen custard builds fierce loyalty (nostalgia, richness, premium perception, daily-fresh positioning). Both support premium pricing.</p>
+
+                <div class="key-finding">
+                    <strong>Critical Market Gap:</strong> No significant established frozen-custard category exists in Morocco, while frozen yogurt has minimal presence. This represents both opportunity and risk — low category awareness vs. low competition.
+                </div>
+
+                <h3>Comparative Strengths</h3>
+                <div class="comparison-row">
+                    <div class="comparison-item frozen-yogurt">
+                        <strong>Frozen Yogurt</strong>
+                        <ul>
+                            <li>Global consumer familiarity</li>
+                            <li>Strong customization appeal</li>
+                            <li>Health perception (lower entry barrier)</li>
+                            <li>Proven playbook (Pinkberry, Yogurtland)</li>
+                            <li>High Instagram/TikTok potential</li>
+                            <li>Lower risk, established category</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item frozen-custard">
+                        <strong>Frozen Custard</strong>
+                        <ul>
+                            <li>Extremely high product differentiation</li>
+                            <li>Premium perception (egg yolks, richness)</li>
+                            <li>Exceptional brand loyalty (Culver's 40-yr data)</li>
+                            <li>Limited competition in Morocco</li>
+                            <li>Strong repeat-purchase drivers</li>
+                            <li>Category creation advantage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Risk Profile</h3>
+                <div class="comparison-row">
+                    <div class="comparison-item frozen-yogurt">
+                        <strong>Risks</strong>
+                        <ul>
+                            <li>High fragmentation; hard to stand out</li>
+                            <li>Lower perceived differentiation</li>
+                            <li>Customization alone ≠ brand loyalty</li>
+                            <li>Perception challenged by toppings nutrition</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item frozen-custard">
+                        <strong>Risks</strong>
+                        <ul>
+                            <li>Consumer education required</li>
+                            <li>Higher execution bar (fresh daily)</li>
+                            <li>Market unproven in Morocco</li>
+                            <li>Richer product may reduce frequency for some</li>
+                            <li>Import dependencies (dairy sourcing)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Preliminary Verdict</h3>
+                <p><strong>Frozen Yogurt:</strong> Lower-risk, proven, customizable. Works. But enters a crowded category globally; will compete on execution and brand, not novelty.</p>
+                <p><strong>Frozen Custard:</strong> Higher-risk, highly differentiated, defensible. Category ownership possible. Loyalty data from Culver's (40+ years, $4.2M AUV) suggests deep consumer appeal once established.</p>
+
+                <div class="decision-frame">
+                    <h4>Hypothesis to Validate</h4>
+                    <p><strong>Frozen Yogurt</strong> = lower-risk, easier-to-understand, highly customizable entry strategy for a broader market.</p>
+                    <p><strong>Frozen Custard</strong> = higher-risk but potentially much more differentiated, premium, and defensible in Morocco.</p>
+                    <p>The evidence below will test which aligns with your brand vision.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: GLOBAL OVERVIEW -->
+        <div id="global-overview" class="nav-section">
+            <div class="section">
+                <h2>2. Global Category Overview</h2>
+                
+                <h3>Market Size & Growth</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">$3–9B</div>
+                        <div class="stat-label">Frozen Yogurt Global Market</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">$1.4B</div>
+                        <div class="stat-label">Frozen Custard Global Market</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4–6%</div>
+                        <div class="stat-label">Frozen Yogurt CAGR (2025–2032)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">5.9%</div>
+                        <div class="stat-label">Frozen Custard CAGR (2026–2035)</div>
+                    </div>
+                </div>
+
+                <p><strong>Note on market estimates:</strong> Frozen yogurt figures vary significantly across sources ($1.9B–$109B depending on definition boundaries). Conservative estimate: $3–9B. Frozen custard data more consistent: $1.4B globally, with USA representing ~34% of global market ($486M in 2025).</p>
+
+                <h3>Geographic Concentration</h3>
+                <div class="chart-container">
+                    <canvas id="geoChart"></canvas>
+                </div>
+
+                <h3>Category Characteristics</h3>
+                <table>
+                    <tr>
+                        <th>Dimension</th>
+                        <th>Frozen Yogurt</th>
+                        <th>Frozen Custard</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Geographic strength</strong></td>
+                        <td>USA (38% global), Asia-Pacific (fastest growth)</td>
+                        <td>North America (64% of global market), Midwest USA concentrated</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market maturity</strong></td>
+                        <td>Mature in North America, high growth in Asia</td>
+                        <td>Mature in USA Midwest, emerging internationally</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Major brands</strong></td>
+                        <td>Yogurtland (~250 locations), Pinkberry, Menchie's, 16 Handles</td>
+                        <td>Culver's (1000+ locations), Freddy's (600+), Rita's, Shake Shack</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Growth drivers</strong></td>
+                        <td>Health trends, customization, probiotic demand, Asia innovation</td>
+                        <td>Premium positioning, loyalty, nostalgia, burger combo concept</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Seasonality</strong></td>
+                        <td>Moderate (year-round consumption rising)</td>
+                        <td>Moderate-high (summer peak, winter decline)</td>
+                    </tr>
+                </table>
+
+                <div class="key-finding">
+                    <strong>Insight:</strong> Frozen yogurt's Asia-Pacific momentum reflects flavor innovation (matcha, ube, regional adaptations) and premiumization. Frozen custard's North America dominance reflects burger/QSR bundling (Culver's, Freddy's, Shake Shack) and Midwest cultural affinity.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: CONSUMER APPEAL -->
+        <div id="consumer-appeal" class="nav-section">
+            <div class="section">
+                <h2>3. Consumer Appeal & Sentiment</h2>
+
+                <h3>What Consumers Love About Frozen Yogurt</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Customization control.</strong> Self-serve model lets consumers build their own experience; toppings are highly Instagram-able.</li>
+                    <li><strong>Health perception.</strong> Probiotics, lower fat content, and perceived wellness appeal—especially Gen Z and health-conscious adults.</li>
+                    <li><strong>Freshness & variety.</strong> Rotating flavors (monthly LTOs), limited-edition seasonal offerings, regional adaptations (matcha, ube, regional fruits).</li>
+                    <li><strong>Social experience.</strong> Pinkberry/Yogurtland/Menchie's became social hubs for young adults; "froyo date" culture.</li>
+                    <li><strong>Portion flexibility.</strong> Pay-by-weight model appeals to health-conscious consumers wanting smaller servings.</li>
+                    <li><strong>Flavor innovation.</strong> Asia-Pacific driving premiumization through unique flavors (Lalasweet Greek yogurt 76× YoY growth in South Korea in 2024).</li>
+                </ul>
+
+                <h3>What Consumers Love About Frozen Custard</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Texture & creaminess.</strong> Egg yolks create velvet-like density; "smoother, silkier than ice cream" per Culver's brand research.</li>
+                    <li><strong>Indulgence.</strong> Perceived as premium, craft, small-batch. High-fat content (14% by definition) = richness consumers actively seek.</li>
+                    <li><strong>Freshness commitment.</strong> Culver's "made fresh throughout the day in-house" positioning resonates—no frozen stockpiles, batch production.</li>
+                    <li><strong>Loyalty & nostalgia.</strong> Culver's 40-year tenure shows custard builds transgenerational loyalty; families return weekly, recommend it to friends.</li>
+                    <li><strong>Mix-in versatility.</strong> Concretes (Shake Shack) and mix-ins (Culver's) create personalization without self-serve chaos.</li>
+                    <li><strong>Premium perception.</strong> Culver's $4.2M AUV (2025) proves consumers will pay for perceived quality; custard commands price premium over ice cream.</li>
+                </ul>
+
+                <div class="chart-container">
+                    <canvas id="appealChart"></canvas>
+                </div>
+
+                <h3>What Consumers Complain About</h3>
+                <div class="comparison-row">
+                    <div class="comparison-item frozen-yogurt">
+                        <strong>Frozen Yogurt Complaints</strong>
+                        <ul>
+                            <li>"Toppings make it unhealthy" (sugar, candy override yogurt benefit)</li>
+                            <li>"Tastes sour/artificial" (quality variance between shops)</li>
+                            <li>"Another froyo chain—nothing special"</li>
+                            <li>"High prices for self-serve" (perception)</li>
+                            <li>"Consistency issues between franchises"</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item frozen-custard">
+                        <strong>Frozen Custard Complaints</strong>
+                        <ul>
+                            <li>"Rich but heavy" (one serving fills consumers)</li>
+                            <li>"Seasonal availability" (Midwest chains close in winter)</li>
+                            <li>"Limited flavor choice" (vs. frozen yogurt's 40+ options)</li>
+                            <li>"Not perceived as healthy" (egg yolks, high fat)</li>
+                            <li>"Geographic limitation" (Culver's only in 26 states)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="key-finding">
+                    <strong>Consumer verdict:</strong> Frozen yogurt wins on "healthy" perception and novelty; frozen custard wins on "premium" perception and loyalty. Consumers don't compare them directly—frozen yogurt = healthy snack, frozen custard = indulgent treat. They occupy different consumption occasions.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: BUSINESS MODELS -->
+        <div id="business-models" class="nav-section">
+            <div class="section">
+                <h2>4. Business Model Comparison</h2>
+
+                <h3>Frozen Yogurt Business Model</h3>
+                <p><strong>Format:</strong> Self-serve, pay-by-weight. Customer loads cup, selects toppings, pays at checkout. Low labor at point-of-sale (vs. counter service).</p>
+                <p><strong>Customization:</strong> 30+ toppings standard; unlimited flavor combinations. Highly Instagrammable.</p>
+                <p><strong>Flavor rotation:</strong> Monthly LTO (limited-time offerings) drive repeat visits. Seasonal / regional flavors.</p>
+                <p><strong>Positioning:</strong> Casual, fun, health-forward. Urban locations (malls, high-traffic areas).</p>
+                <p><strong>Unit economics:</strong> 250–400 unit franchises (Yogurtland, Menchie's); average unit volumes lower than custard concepts (~$1.5–2.5M estimated).</p>
+                <p><strong>Delivery/Digital:</strong> Strong online presence, digital toppings menus, Instagram strategy (user-generated content = free marketing).</p>
+
+                <h3>Frozen Custard Business Model</h3>
+                <p><strong>Format:</strong> Counter service, small-batch production. Crew scoops and hand-packs. Higher touch, craft positioning.</p>
+                <p><strong>Customization:</strong> Signature Flavor of the Day (limited choice, exclusivity); mix-ins/concretes (staff-made per order).</p>
+                <p><strong>Flavor rotation:</strong> Daily Flavor of the Day (Culver's model) creates urgency and drives repeat visits for "collector" behavior.</p>
+                <p><strong>Positioning:</strong> Premium, craft, family-friendly (QSR bundled with burgers at Culver's, Freddy's, Shake Shack).</p>
+                <p><strong>Unit economics:</strong> Culver's 1000+ units, $4.2M AUV (2025); Freddy's 600 units, growing. Higher transaction values (custard + burger/fries).</p>
+                <p><strong>Delivery:</strong> Emerging (Culver's mobile ordering, curbside pickup); less Instagram-focused than frozen yogurt.</p>
+
+                <div class="chart-container">
+                    <canvas id="businessModelChart"></canvas>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Criteria</th>
+                        <th>Frozen Yogurt</th>
+                        <th>Frozen Custard</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Differentiation</strong></td>
+                        <td>Moderate (flavor + toppings, not unique)</td>
+                        <td><span class="score-high">High</span> (product itself is unique)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repeat-purchase frequency</strong></td>
+                        <td>Moderate (monthly LTO drive return)</td>
+                        <td><span class="score-high">High</span> (Flavor of the Day, loyalty data 2–3x/week)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Premium-pricing potential</strong></td>
+                        <td>Moderate (health angle); $8–12 typical</td>
+                        <td><span class="score-high">High</span> (craft premium); $9–16 typical</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operational complexity</strong></td>
+                        <td><span class="score-low">Low</span> (self-serve, minimal training)</td>
+                        <td>Moderate (batch production, daily flavor management, scooping)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scalability</strong></td>
+                        <td><span class="score-high">High</span> (self-serve = unit replicability)</td>
+                        <td>Moderate (quality depends on crew; harder to scale in new markets)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brand loyalty</strong></td>
+                        <td>Moderate (attached to flavor/toppings, not brand)</td>
+                        <td><span class="score-high">High</span> (attached to product & experience)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Social media potential</strong></td>
+                        <td><span class="score-high">High</span> (self-serve = endless combinations)</td>
+                        <td>Moderate (concretes are visual, less UGC-friendly than froyo)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Family appeal</strong></td>
+                        <td><span class="score-high">High</span> (fun, customizable, perceived healthy)</td>
+                        <td><span class="score-high">High</span> (bundled with burgers, nostalgic)</td>
+                    </tr>
+                </table>
+
+                <div class="key-finding">
+                    <strong>Business model insight:</strong> Frozen yogurt prioritizes scalability and social virality; frozen custard prioritizes differentiation and loyalty. Yogurt is a distribution play (100s of locations, self-serve efficiency). Custard is a brand play (tight franchisee control, product quality).
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: CASE STUDIES -->
+        <div id="case-studies" class="nav-section">
+            <div class="section">
+                <h2>5. International Case Studies</h2>
+
+                <h3>Pinkberry (Frozen Yogurt, Global Leader)</h3>
+                <div class="case-study">
+                    <div class="case-study-title">Concept: Premium tart frozen yogurt + fresh fruit toppings</div>
+                    <div class="case-study-detail">
+                        Founded 2005 (Los Angeles). Minimal-design Apple-store–like aesthetic. Signature tart flavor (probiotics positioned as health benefit). Fresh fruit toppings, no candy. Premium brand equity score 9.1/10 (top quartile). Allows 15–20% price premium over competitors. Presence in high-traffic urban centers and luxury malls globally. Weakness: 2022 sales down 31.8% over 3-year average; unit count declining (market saturation, frozen yogurt trend fade).
+                    </div>
+                </div>
+
+                <h3>Yogurtland (Frozen Yogurt, Franchisee Favorite)</h3>
+                <div class="case-study">
+                    <div class="case-study-title">Concept: Self-serve, pay-by-weight, 250+ locations</div>
+                    <div class="case-study-detail">
+                        Founded 2006 (California). Pioneered self-serve + pay-by-weight model. Proprietary rotating flavor system; 40+ options at any location. Strong digital strategy (Instagram UGC, TikTok). Adaptable to regional tastes (mango in Asia, tropical in tropical markets). Recent moves: dairy-free partnerships (Oatly), plant-based lines. Growth is stable but not explosive; premium brand positioning works in affluent neighborhoods.
+                    </div>
+                </div>
+
+                <h3>Culver's (Frozen Custard, Gold Standard)</h3>
+                <div class="case-study">
+                    <div class="case-study-title">Concept: ButterBurgers + Fresh Frozen Custard, daily Flavor of the Day</div>
+                    <div class="case-study-detail">
+                        Founded 1984 (Wisconsin). 1000+ company-owned and franchised restaurants across 26 states. $4.2M average unit volume (2025)—the highest among dessert-focused QSRs. Fresh custard made on-site throughout the day (competitive advantage: no freezer stock). Flavor of the Day creates urgency and collectibility. Strong customer loyalty (families visit 2–3x/week); employee satisfaction high (Midwest hospitality culture). Burger bundling critical to AUV. Expansion strategy: slow and controlled, prioritizing unit quality. International expansion minimal (cultural Midwest attachment).
+                    </div>
+                </div>
+
+                <h3>Freddy's Frozen Custard & Steakburgers (Custard, Growth Challenger)</h3>
+                <div class="case-study">
+                    <div class="case-study-title">Concept: Steakburgers + crinkle fries + frozen custard, 600 locations</div>
+                    <div class="case-study-detail">
+                        Founded 2002 (Kansas). Rapid franchisee-driven expansion (~60 locations/year). $475M revenue (2020s). Opening in new markets (Northeast, Florida, Pacific Northwest). Inline and end-cap store formats expanding (lower capex than standalone). 12.9% sales growth year-over-year (competing with Culver's). Burger-custard bundling same as Culver's. Recent focus: digital ordering, POS infrastructure, app development. International pilot ongoing (Canada expansion).
+                    </div>
+                </div>
+
+                <h3>Shake Shack (Frozen Custard as Menu Component)</h3>
+                <div class="case-study">
+                    <div class="case-study-title">Concept: Premium burgers + shakes + frozen custard, global presence</div>
+                    <div class="case-study-detail">
+                        Founded 2004 (via Danny Meyer's Union Square Hospitality). 400+ locations globally (USA, Japan, UK, Middle East). Frozen custard is 10–15% of menu revenue; shakes are the hero product. Custard made fresh daily, scooped to order. Concretes and seasonal flavor calendars drive repeat visits. International adaptation: cherry blossom shake (Japan), red bean (Korea), pandan (Singapore). Premium positioning (higher check average than QSR burger competitors). Expansion via company-owned + licensed model. Custard is supporting player to burgers, not primary driver.
+                    </div>
+                </div>
+
+                <h3>Lalasweet (Frozen Yogurt, Asia Premiumization Champion)</h3>
+                <div class="case-study">
+                    <div class="case-study-title">Concept: Greek-yogurt ice cream, Korea, 76x growth in 4 months</div>
+                    <div class="case-study-detail">
+                        South Korea market. Positioned as "affordable luxury" (KRW 3,000 vs. KRW 1,500 standard). Greek yogurt base (higher protein, premium perception). Sold 4.4M units in first four months of 2024—76× year-over-year growth. Reflects broader Asia trend: premiumization + health positioning + regional innovation driving frozen yogurt adoption faster than Western markets.
+                    </div>
+                </div>
+
+                <div class="key-finding">
+                    <strong>Case study synthesis:</strong>
+                    <br/>• Frozen yogurt leaders (Pinkberry, Yogurtland) succeeded on innovation + Instagram, but face declining unit counts and category saturation.
+                    <br/>• Frozen custard leaders (Culver's, Freddy's) achieve higher AUV, stronger loyalty, and steadier growth by bundling with burgers or creating product scarcity (daily Flavor of the Day).
+                    <br/>• Asia is reshaping frozen yogurt with premiumization and regional flavors (Lalasweet). Custard has not significantly penetrated Asia.
+                    <br/>• Shake Shack proves custard can work globally when positioned as a premium menu component, not primary draw.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 6: MOROCCO OPPORTUNITY -->
+        <div id="morocco" class="nav-section">
+            <div class="section">
+                <h2>6. Morocco & Casablanca Market Opportunity</h2>
+
+                <h3>Casablanca Demographics & Context</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">3.2M</div>
+                        <div class="stat-label">Casablanca population</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">25%</div>
+                        <div class="stat-label">Population under 15</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">98%</div>
+                        <div class="stat-label">Urban residents</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">11%</div>
+                        <div class="stat-label">Morocco's population share</div>
+                    </div>
+                </div>
+
+                <h3>Market Landscape</h3>
+                <p><strong>Ice cream / frozen dessert culture:</strong> Traditional gelato and ice cream exist; takeaway consumption rising among affluent + young urban consumers. Premium dessert trend emerging (artisanal ice cream gaining traction). Dessert is a leisure purchase, not essential, so price sensitivity exists but premiumization opportunity is present.</p>
+
+                <p><strong>Consumer preferences:</strong> Health trends (low-fat, dairy-free options) emerging among young adults. Social media-driven (Instagram/TikTok highly prevalent among 18–35 demographic). Families seek modern leisure experiences. Tourism to Casablanca is growing (commercial hub).</p>
+
+                <p><strong>Existing competition:</strong> Generic ice cream parlors, traditional patisseries, no established frozen yogurt brands, <strong>no significant frozen custard competitors identified</strong>. This is a white space.</p>
+
+                <p><strong>Advantages for premium entry:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Young population (median age ~30) = receptive to new concepts</li>
+                    <li>Affluent urban core in Casablanca (business district, residential neighborhoods)</li>
+                    <li>Tourism influx (international visitors = early adopters)</li>
+                    <li>Social media saturation = viral potential</li>
+                    <li>Dessert market still developing = opportunity to shape category perception</li>
+                </ul>
+
+                <p><strong>Challenges:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Category education required for frozen custard (unknown product category)</li>
+                    <li>Price sensitivity in broader market (premium positioning = niche targeting)</li>
+                    <li>Dairy sourcing / cold chain infrastructure (need robust partnerships)</li>
+                    <li>Competition from established ice cream and patisserie traditions</li>
+                </ul>
+
+                <h3>Is the Absence of Frozen Custard a Weakness or Opportunity?</h3>
+                <p><strong>Answer: Opportunity, with execution risk.</strong></p>
+                <p>Low category awareness is an obstacle, not a fatal flaw. Consumers in Morocco already know indulgent frozen desserts (ice cream, gelato) and premium food concepts (coffee culture, modern cafés). Frozen custard can be positioned as a "premium upgrade" to ice cream—higher-quality, craft, daily-fresh—rather than an entirely foreign concept. Culver's data proves that once introduced, custard builds exceptional loyalty.</p>
+                
+                <p>The real risk is <strong>not</strong> lack of awareness, but <strong>execution quality and location strategy</strong>. A poorly sited, poorly executed frozen custard shop will fail. A well-positioned, high-quality custard shop in Casablanca's affluent core (targeting young professionals, tourists, families seeking premium experiences) could own the category.</p>
+
+                <div class="key-finding">
+                    <strong>Morocco verdict:</strong> Frozen yogurt = easier market entry but higher competitive pressure (even locally). Frozen custard = requires more consumer education but zero category competition, strong differentiation, and alignment with global premiumization trend.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 7: STRATEGIC SCORECARD -->
+        <div id="scorecard" class="nav-section">
+            <div class="section">
+                <h2>7. Strategic Scorecard</h2>
+                <p><strong>Legend:</strong> 1–3 = Low, 4–6 = Medium, 7–10 = High. Scores are <em>strategic synthesis</em> based on global research, not direct consumer surveys.</p>
+
+                <table>
+                    <tr>
+                        <th>Criteria</th>
+                        <th>Frozen Yogurt</th>
+                        <th>Frozen Custard</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Consumer familiarity (global)</strong></td>
+                        <td><span class="score-high">8</span></td>
+                        <td><span class="score-medium">5</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Product appeal (taste/experience)</strong></td>
+                        <td>7</td>
+                        <td><span class="score-high">9</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Taste potential (Morocco-adapted flavors)</strong></td>
+                        <td><span class="score-high">8</span></td>
+                        <td><span class="score-high">9</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Premium perception</strong></td>
+                        <td>7</td>
+                        <td><span class="score-high">9</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Differentiation in Morocco</strong></td>
+                        <td><span class="score-medium">6</span></td>
+                        <td><span class="score-high">10</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customization appeal</strong></td>
+                        <td><span class="score-high">9</span></td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repeat-purchase potential</strong></td>
+                        <td>7</td>
+                        <td><span class="score-high">9</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Family appeal</strong></td>
+                        <td><span class="score-high">8</span></td>
+                        <td><span class="score-high">8</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gen Z appeal</strong></td>
+                        <td><span class="score-high">9</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>25–34 appeal</strong></td>
+                        <td>7</td>
+                        <td><span class="score-high">8</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Social media potential (Instagram/TikTok)</strong></td>
+                        <td><span class="score-high">9</span></td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Product innovation runway</strong></td>
+                        <td><span class="score-high">8</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operational complexity</strong></td>
+                        <td><span class="score-high">9</span> (simple)</td>
+                        <td><span class="score-medium">5</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scalability</strong></td>
+                        <td><span class="score-high">9</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brand loyalty potential</strong></td>
+                        <td>7</td>
+                        <td><span class="score-high">10</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Category ownership potential</strong></td>
+                        <td><span class="score-medium">5</span></td>
+                        <td><span class="score-high">10</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><strong>TOTAL (sum of scores)</strong></td>
+                    </tr>
+                    <tr style="background: #f0f5fa; font-weight: 600;">
+                        <td>Frozen Yogurt</td>
+                        <td colspan="2" style="text-align: center;">119 / 160</td>
+                    </tr>
+                    <tr style="background: #fff5f0; font-weight: 600;">
+                        <td>Frozen Custard</td>
+                        <td colspan="2" style="text-align: center;">131 / 160</td>
+                    </tr>
+                </table>
+
+                <div class="decision-frame">
+                    <h4>Scorecard Interpretation</h4>
+                    <p><strong>Frozen Custard: 131/160</strong> — Leads on product differentiation, premium perception, repeat purchase, loyalty, and category ownership. Trails on social media potential and operational simplicity.</p>
+                    <p><strong>Frozen Yogurt: 119/160</strong> — Leads on customization, simplicity, scalability, and social media. Trails on differentiation and loyalty potential.</p>
+                    <p><strong>Margin: +12 points for frozen custard.</strong> This is meaningful but not overwhelming. The choice depends on your strategic priority: category ownership + brand loyalty, or market penetration + operational ease.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 8: FINAL RECOMMENDATION -->
+        <div id="recommendation" class="nav-section">
+            <div class="section">
+                <h2>8. Strategic Recommendation</h2>
+
+                <h3>The Case for Frozen Custard</h3>
+                <p>Based on the evidence, <strong>Frozen Custard is the recommended entry strategy for your premium brand in Casablanca.</strong></p>
+
+                <p><strong>Why:</strong></p>
+                <ol style="margin-left: 20px; line-height: 1.9;">
+                    <li><strong>Zero category competition in Morocco.</strong> Frozen custard is genuinely absent from the market. This is not a weakness—it is a competitive moat. You can own the category definition and become the customer's reference point for premium frozen custard.</li>
+                    <li><strong>Superior differentiation.</strong> Frozen yogurt differentiates on flavors and toppings—which competitors can copy. Frozen custard differentiates on <em>the product itself</em>—the texture, richness, craftsmanship, daily-fresh positioning. This is harder to copy and builds deeper brand attachment.</li>
+                    <li><strong>Exceptional loyalty potential.</strong> Culver's 40-year track record, $4.2M AUV, and 2–3x weekly frequency prove that frozen custard builds transgenerational, family-based loyalty. Frozen yogurt's declining unit counts (Pinkberry, Menchie's) suggest shallower loyalty.</li>
+                    <li><strong>Premium positioning alignment.</strong> Your brand concept ("Le conseil avant la transaction" / advice before transaction) suggests a high-touch, quality-focused approach. Frozen custard's craft positioning and made-fresh ethos align perfectly with this. Frozen yogurt is self-serve and transactional.</li>
+                    <li><strong>Global trend alignment.</strong> Premiumization is accelerating globally (Asia-Pacific, North America). Consumers are willing to pay more for perceived quality, craft, and health attributes. Frozen custard (especially with smart ingredient sourcing—local dairy, probiotic cultures, clean label positioning) can capture this trend.</li>
+                    <li><strong>Runw for expansion.</strong> If successful in Casablanca, a custard concept can expand to Rabat, Marrakech, and internationally (Middle East, Europe) far more easily than another froyo shop. Culver's and Freddy's international playbooks prove this.</li>
+                </ol>
+
+                <h3>Recommended Entry Strategy: Hybrid/Phased Model</h3>
+                <p><strong>Phase 1 (Year 1–18 months):</strong> Premium frozen custard as the core product. Position as "the craft alternative to mass-market ice cream." Daily Flavor of the Day strategy (create urgency and collectibility). Concretes/mix-ins for customization. High-quality local sourcing (Moroccan dairy partners, seasonal ingredients). Singular, flagship location in high-traffic Casablanca locale (business district or affluent residential area).</p>
+
+                <p><strong>Phase 2 (Year 2+):</strong> Once custard brand is established, consider limited frozen yogurt offerings as a summer or health-conscious variant (dairy-free option, lower-fat alternative). This is *not* rebranding to froyo; it's a supporting menu item that allows you to capture off-peak occasions (summer, health seekers) without diluting the custard brand.</p>
+
+                <p><strong>Why hybrid?</strong> Pure frozen custard is your competitive advantage; pure frozen yogurt is a commoditized category. A hybrid approach lets you own custard and use yogurt as a supporting product for specific occasions, not as a co-equal brand pillar.</p>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">If You Choose Frozen Yogurt Instead</div>
+                    <p>Frozen yogurt is a viable, lower-risk alternative if your priority is operational simplicity and immediate scalability. Execute with:</p>
+                    <ul style="margin-left: 20px;">
+                        <li>Premium positioning (not mass-market; avoid generic "froyo")</li>
+                        <li>Limited but high-quality toppings (fresh fruit, nuts, artisanal sauces—not candy)</li>
+                        <li>Monthly LTO strategy (innovation cadence similar to Yogurtland)</li>
+                        <li>Moroccan flavor innovation (date, amlou, orange blossom, pistachio bases)</li>
+                        <li>Strong digital + Instagram strategy (essential for Gen Z capture)</li>
+                        <li>High-traffic location strategy (shopping centers, not standalone)</li>
+                    </ul>
+                    <p><strong>Risk:</strong> You will compete directly with established frozen yogurt chains globally. Differentiation comes down to execution, location, and brand—not product uniqueness. This is harder long-term.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 9: VALIDATION PLAN -->
+        <div id="testing" class="nav-section">
+            <div class="section">
+                <h2>9. Casablanca Validation Plan: Before You Invest</h2>
+
+                <p>Do not make the final investment decision based solely on this desk research. The following validation plan is essential.</p>
+
+                <h3>Phase 1: Concept Testing (Weeks 1–4)</h3>
+                <p><strong>Objective:</strong> Test frozen custard vs. frozen yogurt appeal in your target Casablanca market.</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Blind taste test:</strong> Recruit 60–80 target consumers (ages 18–45, affluent urban Casablanca, active on social media). Serve blind samples of: (A) premium frozen custard, (B) premium frozen yogurt, (C) high-end ice cream. Ask for taste preference, texture preference, purchase intent, willingness to pay.</li>
+                    <li><strong>Concept cards:</strong> Show each consumer brand positioning cards for "craft frozen custard" vs. "premium custom froyo." Measure purchase intent, brand perception, and price sensitivity.</li>
+                    <li><strong>Occasion mapping:</strong> Identify when consumers would choose each option (social outing, family dessert, personal treat, summer vs. winter).</li>
+                </ul>
+
+                <h3>Phase 2: Location & Demographic Viability (Weeks 3–8)</h3>
+                <p><strong>Objective:</strong> Validate target market size, foot traffic, and location potential.</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Site analysis:</strong> Scout 3–5 potential Casablanca locations (high-traffic commercial, affluent residential nearby). Measure foot traffic patterns, demographic composition, rent assumptions, competitor proximity.</li>
+                    <li><strong>Demographic segmentation:</strong> Quantify addressable market in target neighborhoods (25–45 age range, upper-middle income, college educated). Use local census data + consumer surveys.</li>
+                    <li><strong>Tourism flow:</strong> Validate international visitor patterns to Casablanca and likelihood of trial.</li>
+                </ul>
+
+                <h3>Phase 3: Flavor & Product Adaptation Testing (Weeks 5–12)</h3>
+                <p><strong>Objective:</strong> Test Moroccan flavor appeal and product adaptation.</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Flavor co-creation:</strong> Work with local ingredient suppliers (dairy, fruit, spice producers). Develop 5–7 Moroccan-inspired custard flavors (date, pistachio, amlou, orange blossom, honey, saffron, argan). Test with consumer panel.</li>
+                    <li><strong>Ingredient sourcing:</strong> Validate local dairy sourcing (milk, cream, eggs). Identify cold-chain partners for logistics.</li>
+                    <li><strong>Production feasibility:</strong> Mini-batch production in a local kitchen or partnership facility. Prove daily-fresh production model is operationally viable.</li>
+                </ul>
+
+                <h3>Phase 4: Pop-Up Pilot (Weeks 10–16)</h3>
+                <p><strong>Objective:</strong> Test full concept in market with limited risk.</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Pop-up location:</strong> Open a temporary frozen custard stand or cart in a high-traffic Casablanca location (mall, commercial district, university) for 4–6 weeks.</li>
+                    <li><strong>Measure:</strong> Daily/weekly sales volume, customer demographics, repeat rate, basket size, flavor preferences, social media engagement (Instagram tagging, shares), customer feedback, willingness to recommend.</li>
+                    <li><strong>Pricing test:</strong> A/B test price points (DH 50 vs. DH 75 for standard serving) to determine price elasticity.</li>
+                    <li><strong>Win/loss analysis:</strong> Why did customers choose your concept over ice cream or nothing? What would make them visit more frequently?</li>
+                </ul>
+
+                <h3>Decision Checkpoint: Proceed or Pivot?</h3>
+                <p><strong>Green light (proceed to flagship store):</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Blind taste test shows frozen custard significantly preferred over frozen yogurt (60%+ preference).</li>
+                    <li>Pop-up sales exceed 300+ units per week at target price point.</li>
+                    <li>Repeat customer rate ≥20% (indicates loyalty potential).</li>
+                    <li>Average transaction value ≥ projection (price acceptance validated).</li>
+                    <li>Social media engagement strong (organic tagging, word-of-mouth indicators).</li>
+                </ul>
+
+                <p><strong>Amber light (pilot longer or adjust):</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Custard vs. yogurt preference is marginal or mixed.</li>
+                    <li>Pop-up sales are solid but not exceptional (150–250 units/week).</li>
+                    <li>Repeat rate is lower than expected (5–10%).</li>
+                    <li>Price resistance at target point; demand stronger at lower price.</li>
+                    <li>Consider hybrid frozen custard + frozen yogurt model to capture broader market.</li>
+                </ul>
+
+                <p><strong>Red light (pivot or abort):</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Frozen custard shows no advantage over frozen yogurt or ice cream in blind test.</li>
+                    <li>Pop-up sales underperform (≤100 units/week at target price).</li>
+                    <li>Repeat rate negligible (&lt;5%).</li>
+                    <li>Strong price resistance even at discounted levels.</li>
+                    <li>Social media engagement minimal; no organic word-of-mouth.</li>
+                    <li>Action: Pivot to frozen yogurt model, different location, different positioning, or abort dessert concept.</li>
+                </ul>
+
+                <div class="success">
+                    <strong>Critical success factor:</strong> Do not skip the pop-up phase. A 4–6 week pilot costs far less than a flagship build-out and will answer your most critical questions before you commit real capital.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 10: DECISION SUMMARY -->
+        <div id="decision" class="nav-section">
+            <div class="section">
+                <h2>10. The Decision</h2>
+
+                <div class="decision-frame" style="border: none; padding: 0;">
+                    <h3 style="margin-top: 0;">What the World Tells Us</h3>
+                    <p>Globally, frozen yogurt is a larger, more mature category with strong growth in Asia-Pacific, driven by premiumization and regional flavors. Frozen custard is smaller, North America-concentrated, but shows exceptional loyalty metrics (Culver's $4.2M AUV, 40-year retention) and steady growth (5.9% CAGR).</p>
+
+                    <h3>What Consumers Want</h3>
+                    <p>Frozen yogurt consumers want health, customization, and novelty. Frozen custard consumers want indulgence, quality, and daily-fresh craftsmanship. The two categories serve different occasions and psychographics—they do not directly compete; they are complementary.</p>
+
+                    <h3>What Frozen Yogurt Does Better</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Perceived health benefit (lower fat, probiotics)</li>
+                        <li>Customization and self-serve appeal</li>
+                        <li>Operational simplicity and unit replicability</li>
+                        <li>Social media virality (Instagram-friendly)</li>
+                        <li>Global consumer familiarity</li>
+                    </ul>
+
+                    <h3>What Frozen Custard Does Better</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Product differentiation (texture, richness, unique)</li>
+                        <li>Premium perception and price power</li>
+                        <li>Repeat-purchase frequency and loyalty</li>
+                        <li>Brand attachment (not commodity)</li>
+                        <li>Category ownership potential (Morocco = white space)</li>
+                    </ul>
+
+                    <h3>Why Morocco is Different</h3>
+                    <p>No frozen-custard category exists in Morocco (competitive white space). Frozen yogurt has minimal presence. The market is receptive to premium frozen desserts but price-conscious on commodity offerings. Young urban population with social media adoption creates opportunity for viral brand building. Success requires category education for custard, but reward is ownership, not competition in an existing category.</p>
+
+                    <h3>Biggest Opportunity</h3>
+                    <p>Frozen custard: You can define the category in Morocco before competitors arrive. Global precedent (Culver's, Freddy's) proves it works. Once established, custard brand becomes defensible—hard to copy, high loyalty, premium positioning sustainable. Expansion to other Moroccan cities and MENA region becomes natural next step.</p>
+
+                    <h3>Biggest Risk</h3>
+                    <p>Frozen custard: Consumer education required. If execution is poor (location, quality, positioning), the unique product alone will not save you. Must get the full experience right. Pop-up pilot is essential. Also, higher operational complexity and quality-dependence mean franchisee selection is critical.</p>
+
+                    <h3>Recommended Concept</h3>
+                    <p><strong>Premium Frozen Custard</strong> with supporting frozen yogurt options (summer variant, dairy-free tier) after Year 1, if market validation supports it.</p>
+
+                    <h3>What Must Be Validated Before Investing</h3>
+                    <ol style="margin-left: 20px;">
+                        <li>Blind taste test: Frozen custard ≥60% preference over frozen yogurt + ice cream.</li>
+                        <li>Pop-up pilot: ≥300 units/week at target price point; ≥20% repeat rate.</li>
+                        <li>Moroccan flavor appeal: Local ingredient sourcing validated; 5+ original flavors tested and refined.</li>
+                        <li>Location viability: Target neighborhoods have sufficient affluent, digitally-engaged 18–45 demographic.</li>
+                        <li>Operational feasibility: Daily-fresh production model proved in Casablanca partnership facility.</li>
+                    </ol>
+
+                    <div style="margin-top: 28px; padding: 20px; background: #f5f9ff; border-radius: 8px; border-left: 4px solid #2a78d6;">
+                        <p style="margin: 0; font-size: 16px; line-height: 1.6;"><strong>Final Recommendation:</strong></p>
+                        <p style="margin: 12px 0 0; font-size: 16px;"><span style="background: #fff3cd; padding: 4px 8px; border-radius: 4px;">Frozen Custard</span> is the recommended entry strategy because it offers zero-competition category ownership, superior differentiation, exceptional loyalty potential, and alignment with global premiumization trends—but only proceed after validating consumer appeal and operational feasibility through the phased pop-up pilot described above.</p>
+                    </div>
+                </div>
+
+                <div class="footnote">
+                    <p><strong>Sources (Summary):</strong></p>
+                    <ul style="font-size: 12px; color: #666; margin-left: 20px;">
+                        <li>Frozen Yogurt Market: Data Bridge, Fortune Business Insights, Future Market Insights (2024–2026)</li>
+                        <li>Frozen Custard Market: Precedence Research, Market.us (2025–2026)</li>
+                        <li>Culver's: Company press releases, Restaurant Dive, QSR Magazine (2025–2026)</li>
+                        <li>Freddy's: Company press releases, Franchise Times (2020–2026)</li>
+                        <li>Asia Market Trends: Mordor Intelligence, Korea Times, Coherent Market Insights (2024–2026)</li>
+                        <li>Morocco Market: StrategyHelix, Sagaci Research, Euromonitor (2025–2026)</li>
+                        <li>Casablanca Demographics: World Population Review, City Population (2023–2026)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.nav-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Chart 1: Global Category Maturity / Geography
+        var geoCtx = document.getElementById('geoChart').getContext('2d');
+        new Chart(geoCtx, {
+            type: 'bar',
+            data: {
+                labels: ['North America', 'Europe', 'Asia-Pacific', 'Latin America', 'Middle East/Africa'],
+                datasets: [
+                    {
+                        label: 'Frozen Yogurt',
+                        data: [48, 18, 28, 4, 2],
+                        backgroundColor: '#3266ad',
+                        borderColor: '#3266ad',
+                        borderRadius: 4,
+                        borderSkipped: false
+                    },
+                    {
+                        label: 'Frozen Custard',
+                        data: [64, 8, 12, 10, 6],
+                        backgroundColor: '#eb6834',
+                        borderColor: '#eb6834',
+                        borderRadius: 4,
+                        borderSkipped: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    title: { display: true, text: 'Global Market Share by Region (%)' }
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 70, title: { display: true, text: 'Market Share %' } }
+                }
+            }
+        });
+
+        // Chart 2: Consumer Appeal Comparison
+        var appealCtx = document.getElementById('appealChart').getContext('2d');
+        new Chart(appealCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Perceived Health', 'Taste Quality', 'Customization', 'Premium Feel', 'Loyalty', 'Social Appeal', 'Indulgence', 'Freshness'],
+                datasets: [
+                    {
+                        label: 'Frozen Yogurt',
+                        data: [8, 7, 9, 7, 7, 9, 6, 7],
+                        borderColor: '#3266ad',
+                        backgroundColor: 'rgba(50, 102, 173, 0.1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#3266ad'
+                    },
+                    {
+                        label: 'Frozen Custard',
+                        data: [5, 9, 6, 9, 9, 6, 9, 8],
+                        borderColor: '#eb6834',
+                        backgroundColor: 'rgba(235, 104, 52, 0.1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#eb6834'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    title: { display: true, text: 'Consumer Appeal Attributes (1–10 scale)' }
+                },
+                scales: {
+                    r: { beginAtZero: true, max: 10, title: { display: true, text: 'Appeal Score' } }
+                }
+            }
+        });
+
+        // Chart 3: Business Model Comparison
+        var bmodelCtx = document.getElementById('businessModelChart').getContext('2d');
+        new Chart(bmodelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Differentiation', 'Repeat Purchase', 'Premium Price Power', 'Simplicity', 'Scalability', 'Brand Loyalty', 'Category Ownership'],
+                datasets: [
+                    {
+                        label: 'Frozen Yogurt',
+                        data: [6, 7, 7, 9, 9, 7, 5],
+                        backgroundColor: '#3266ad'
+                    },
+                    {
+                        label: 'Frozen Custard',
+                        data: [9, 9, 9, 5, 7, 10, 10],
+                        backgroundColor: '#eb6834'
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    title: { display: true, text: 'Business Model Strength Comparison' }
+                },
+                scales: {
+                    x: { beginAtZero: true, max: 10 }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
